@@ -68,9 +68,13 @@ const slides: Slide[] = [
 import { FreeMode, Navigation, Autoplay } from "swiper/modules";
 import Image from "next/image";
 
-export const SliderSpecies = () => {
+interface Props{
+  color: string;
+}
+
+export const SliderSpecies = ({color}:Props) => {
   return (
-    <div className="w-full md:w-10/12  lg:w-8/12 flex justify-center">
+    <div className="w-full md:w-10/12  lg:w-8/12 flex justify-center ">
       <Swiper
         style={
           {
@@ -103,7 +107,7 @@ export const SliderSpecies = () => {
                 height={50}
                 className="object-cover rounded-full w-full"
               />
-              <span className="text-center mt-5 text-sm text-watercourse-600  font-semibold md:text-xl">
+              <span className={`text-center mt-5 text-sm text-${color}-600  font-semibold md:text-xl`}>
                 {slide.name}
               </span>
             </div>

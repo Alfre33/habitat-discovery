@@ -42,6 +42,22 @@ enum AquariumCategory {
   AMPHIBIAN
 }
 
+enum CategoriaEspecies {
+  MAMIFERO
+  AVE
+  REPTIL
+  ANFIBIO
+  INSECTO
+  ARACNIDO
+  PEZDULCE
+  PEZSALADO
+  MOLUSCO
+  CRUSTACEO
+  ANEMONA
+  MEDUSA
+  INVERTEBRADO
+}
+
 model User {
   id           String       @id @default(uuid())
   name         String
@@ -67,19 +83,21 @@ model AddressUser {
 }
 
 model Habitat {
-  id                      String                    @id @default(uuid())
-  name                    String
-  type                    HabitatType
-  logo                    String?
-  user                    User                      @relation(fields: [userId], references: [id])
-  userId                  String                    @unique
-  animals                 Animal[]
-  ratings                 Rating[]
-  boletosStyles           BoletosStyle[]
-  OrderItem               OrderItem[]
-  AddressHabitat          AddressHabitat?
-  ImageInstalaciones      ImageInstalaciones[]
-  HabitatCategoryEspecies HabitatCategoryEspecies[]
+  id                 String               @id @default(uuid())
+  name               String
+  type               HabitatType
+  slug               String
+  description        String
+  logo               String?
+  user               User                 @relation(fields: [userId], references: [id])
+  userId             String               @unique
+  animals            Animal[]
+  ratings            Rating[]
+  boletosStyles      BoletosStyle[]
+  OrderItem          OrderItem[]
+  AddressHabitat     AddressHabitat?
+  ImageInstalaciones ImageInstalaciones[]
+  categories         CategoriaEspecies[]
 }
 
 model ImageInstalaciones {
@@ -101,31 +119,23 @@ model AddressHabitat {
 }
 
 model EspeciesCategory {
-  id                      String                    @id @default(uuid())
-  name                    String                    @unique
-  description             String? // Descripción opcional
-  Animal                  Animal[]
-  HabitatCategoryEspecies HabitatCategoryEspecies[]
-}
-
-model HabitatCategoryEspecies {
-  id         String           @id @default(uuid())
-  habitat    Habitat          @relation(fields: [habitatId], references: [id])
-  habitatId  String
-  category   EspeciesCategory @relation(fields: [categoryId], references: [id])
-  categoryId String
+  id            String   @id @default(uuid())
+  name          String   @unique
+  description   String? // Descripción opcional
+  commonAnimals String[]
+  colorHex      String
 }
 
 model Animal {
-  id          String           @id @default(uuid())
+  id          String            @id @default(uuid())
   name        String
   description String
   habitatType HabitatType
-  Habitat     Habitat          @relation(fields: [habitatId], references: [id])
-  habitatId   String           @unique
+  Habitat     Habitat           @relation(fields: [habitatId], references: [id])
+  habitatId   String
+  animalSlug String
   AnimalImage AnimalImage[]
-  Category    EspeciesCategory @relation(fields: [categoryId], references: [id])
-  categoryId  String           @unique
+  category    CategoriaEspecies
 }
 
 model AnimalImage {

@@ -43,10 +43,10 @@ export default function RootLayout({
                 <Link className="block md:text-white mr-4 hover:underline" href="/explore/conocenos">
                   Conocenos
                 </Link>
-                <Link className="block md:text-white mr-4 hover:underline" href="/explore/zoologicos">
+                <Link className="block md:text-white mr-4 hover:underline" href="/explore/ZOO">
                   Zoologicos
                 </Link>
-                <Link className="block md:text-white mr-4 hover:underline" href="/explore/acuarios">
+                <Link className="block md:text-white mr-4 hover:underline" href="/explore/ACUARIO">
                   Acuarios
                 </Link>
                 <Link className="block md:text-white mr-4 hover:underline" href="#">

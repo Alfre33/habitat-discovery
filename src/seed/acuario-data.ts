@@ -1,6 +1,6 @@
-import { HabitatCard } from "@/interfaces";
+import { HabitatCardData } from '../interfaces/card-data.interface';
 
-export const acuarios: HabitatCard[] = [
+export const acuarios: HabitatCardData[] = [
   {
     id: "1",
     habitat: "acuario",

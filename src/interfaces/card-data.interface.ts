@@ -1,4 +1,4 @@
-export interface HabitatCard {
+export interface HabitatCardData {
   id: string;
   habitat:string;
   nombre: string;

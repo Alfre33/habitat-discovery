@@ -1,39 +1,44 @@
 "use client";
-import { HabitatCard } from "@/interfaces";
+import { HabitatResponse } from "@/interfaces/habitat";
+import { AddressHabitat, Habitat } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa6";
 import { LuMapPin } from "react-icons/lu";
 
+interface ImagesInstalaciones {
+  id: string;
+  habitatId: string;
+  url: string;
+}
 interface Props {
-  habitat: HabitatCard;
+  habitat: HabitatResponse;
 }
 export const GridHabitat = ({ habitat }: Props) => {
-  const [displayImage, setdisplayImage] = useState(habitat.imagenUrl[0]);
-  const {
-    descripcion,
-    estado,
-    imagenUrl,
-    nombre,
-    raiting,
-    slug,
-    ubicacion,
-    habitat: tipo,
-  } = habitat;
+  const { AddressHabitat, name, type, description, slug } = habitat;
+  const [displayImage, setdisplayImage] = useState(
+    habitat.ImageInstalaciones[0].url
+  );
+  console.log(displayImage);
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-sm w-full5 duration-300 hover:-translate-y-1">
       <div className="relative">
         <Image
-          src={`/${tipo}/${displayImage}`}
+          src={displayImage}
           //   src={displayImage}
-          alt={nombre}
-          width={300}
-          height={200}
+          alt={name}
+          width={250}
+          height={150}
           className="w-full h-64 object-cover"
-          onMouseEnter={() => setdisplayImage(habitat.imagenUrl[1])}
-          onMouseLeave={() => setdisplayImage(habitat.imagenUrl[0])}
+          onMouseEnter={() =>
+            setdisplayImage(habitat.ImageInstalaciones[1].url)
+          }
+          onMouseLeave={() =>
+            setdisplayImage(habitat.ImageInstalaciones[0].url)
+          }
         />
+
         <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
           SALE
         </span>
@@ -66,16 +71,15 @@ export const GridHabitat = ({ habitat }: Props) => {
       <div className="p-4">
         <div className="flex justify-between items-start mb-2">
           <div>
-            <h2 className="text-xl font-semibold text-gray-800 mb-1">
-              {nombre}
-            </h2>
-            <p className="text-sm text-gray-600">{estado}</p>
+            <h2 className="text-xl font-semibold text-gray-800 mb-1">{name}</h2>
+            <p className="text-md text-gray-600">{AddressHabitat?.state}</p>
           </div>
         </div>
         <div className="py-2 flex items-center">
           <LuMapPin className=" text-green-600 w-2/12" size={25} />
           <p className="text-ms font-semibold text-green-600 w-10/12">
-            {ubicacion}
+            {AddressHabitat?.city},{AddressHabitat?.state},
+            {AddressHabitat?.PostalCode}
           </p>
           {/* <p className="text-sm text-gray-500 line-through">$159.99</p> */}
         </div>
@@ -86,9 +90,9 @@ export const GridHabitat = ({ habitat }: Props) => {
             <FaStar />
             <FaStar />
           </div>
-          <span className="text-gray-600 text-sm ml-2">({raiting}/5)</span>
+          <span className="text-gray-600 text-sm ml-2">(4/5)</span>
         </div>
-        <p className="text-gray-600 text-sm mb-4">{descripcion}</p>
+        <p className="text-gray-600 text-sm mb-4">{description}</p>
         {/* <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
             <i className="fas fa-truck text-blue-500 mr-2"></i>
@@ -100,7 +104,10 @@ export const GridHabitat = ({ habitat }: Props) => {
           </div>
         </div> */}
         <div className="flex space-x-2">
-          <Link href={`/${tipo}/${slug}`} className=" text-center flex-1 bg-watercourse-500 text-white py-2 px-4 rounded-full font-semibold hover:bg-watercourse-700 transition-colors duration-200">
+          <Link
+            href={`/explore/${type}/${slug}`}
+            className=" text-center flex-1 bg-watercourse-500 text-white py-2 px-4 rounded-full font-semibold hover:bg-watercourse-700 transition-colors duration-200"
+          >
             Conocer mas...
           </Link>
           {/* <button className="bg-gray-200 text-gray-800 py-2 px-4 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-200">

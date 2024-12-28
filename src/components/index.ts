@@ -10,6 +10,7 @@ export * from './cards/grid-cards/GridHabitat';
 export * from './explore/AddComent';
 export * from './explore/FilterCategories';
 export * from './explore/HabitatMap';
+export * from './explore/Header';
 export * from './explore/SearchWithFilter';
 export * from './explore/SliderPromotional';
 export * from './explore/TestimonyCards';

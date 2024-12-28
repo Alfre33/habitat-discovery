@@ -1,7 +1,8 @@
 export enum Role {
-    ADMIN = "ADMIN",
-    USER = "USER",
-    GUEST = "GUEST",
+  ADMINAPP='ADMINAPP',
+  ADMINBASIC='ADMINBASIC',
+  ADMINADVANCED='ADMINADVANCED',
+  USER='USER'
   }
   
 export enum HabitatType {
